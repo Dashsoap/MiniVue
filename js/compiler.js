@@ -2,6 +2,7 @@ class Compiler {
     constructor(vm) {
         this.el = vm.$el
         this.vm = vm
+        this.compile(this.el)
     }
     //编译模板 处理文本节点和元素节点
     compile(el) {
@@ -27,8 +28,14 @@ class Compiler {
     compileElement(Node) {
 
     }//编译文本节点
-    compileText(noed) {
-
+    compileText(node) {
+        // console.dir(node)
+        //{{  msg   }}
+        let reg = /\{\{(.+?)\}\}/
+        if(reg.test(value)){
+            let key = RegExp.$1.trim()
+            node.textContent  = value.replace(reg,this.vm[key])
+        }
     }
     //判断元素是否为指令
     isDirective(attrName) {

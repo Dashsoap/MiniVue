@@ -5,6 +5,7 @@ class Vue {
         this.$el = typeof options.el === 'string'?document.querySelector(options.el): options.el
         this._proxyData(this.$data)
         new Observer(this.$data)
+        new Compiler(this)
     }
     _proxyData(data) {
         // 遍历data中的所有属性
