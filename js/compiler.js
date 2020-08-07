@@ -60,6 +60,7 @@ class Compiler {
         // console.dir(node)
         //{{  msg   }}
         let reg = /\{\{(.+?)\}\}/
+        let value = node.textContent
         if (reg.test(value)) {
             let key = RegExp.$1.trim()
             node.textContent = value.replace(reg, this.vm[key])
@@ -67,7 +68,7 @@ class Compiler {
     }
     //判断元素是否为指令
     isDirective(attrName) {
-        return attrName.startWith('v-')
+        return attrName.startsWith('v-')
     }
     //判断节点是否为文本节点
     isTextNode(node) {
