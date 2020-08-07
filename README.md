@@ -2,7 +2,7 @@
 
 ## Vue 2.x 原理
 
-这里摘取官网上的一句话 
+这里摘取官网上的一句话
 当你把一个普通的 JavaScript 对象传入 Vue 实例作为 `data` 选项，Vue 将遍历此对象所有的 property，并使用 `Object.defineProperty` 把这些 property 全部转为 `getter/setter`。`Object.defineProperty` 是 ES5 中一个无法 shim 的特性，这也就是 Vue 不支持 IE8 以及更低版本浏览器的原因。
 [官网原文地址](https://cn.vuejs.org/v2/guide/reactivity.html)
 
@@ -20,7 +20,7 @@
 
 编码方面比`Object.defineProperty` 友好
 
-因为`Proxy` 可以自动遍历`data`对象 
+因为`Proxy` 可以自动遍历`data`对象
 
 且性能又浏览器优化
 
@@ -34,7 +34,7 @@ TODO
 
 ### Vue : 把data中的成员注入到vue实例 并且把data中的成员转成getter和setter
 
-![Vue](https://raw.githubusercontent.com/Dashsoap/PhoneBed/master/uPic/20h7Kl.png) 
+![Vue](https://raw.githubusercontent.com/Dashsoap/PhoneBed/master/uPic/20h7Kl.png)
 
 ### Overver: 负责把data中的属性转换成响应式数据
 
@@ -43,3 +43,11 @@ TODO
 ### Compiler: 负责编译模板,解析指令和差值表达式
 
 ![Compiler](https://raw.githubusercontent.com/Dashsoap/PhoneBed/master/uPic/42jRLw.png)
+
+### Dep: 在getter中收集依赖 添加观察者 并且在setter中通知所有观察者
+
+![Dep](https://raw.githubusercontent.com/Dashsoap/PhotoBed/master/uPic/5qCIyR.png)
+
+结构:![Dep结构](https://raw.githubusercontent.com/Dashsoap/PhotoBed/master/uPic/MQPvkJ.png)
+
+### watcher: 更新视图 把自己添加到Dep中
