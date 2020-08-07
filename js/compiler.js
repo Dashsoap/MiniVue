@@ -25,16 +25,44 @@ class Compiler {
         )
     }
     //编译元素节点 处理指令
-    compileElement(Node) {
+    compileElement(node) {
+        //遍历所有的属性节点
+        Array.from(node.attributes).forEach(attr => {
+            //判断是否是指令
+            let attrName = attr.name
+            if (this.isDirective(attrName)) {
+                //v-text ==>text ...
+                attrName = attrName.substr(2)
+                let key = attr.value
+                this.update(node, key, attrName)
+            }
+        })
+    }
+    update(node, key, attrName) {
+        let updateFn = this[attrName + 'Updater']
+        updateFn && updateFn(node, this.vm[key])
+    }
 
-    }//编译文本节点
+
+
+    //处理v-text指令
+    textUpdater(node, value) {
+        node.textContent = value
+    }
+    // 处理v-modle
+    modelUpdater(node, value) {
+        node.value = value
+    }
+
+
+    //编译文本节点
     compileText(node) {
         // console.dir(node)
         //{{  msg   }}
         let reg = /\{\{(.+?)\}\}/
-        if(reg.test(value)){
+        if (reg.test(value)) {
             let key = RegExp.$1.trim()
-            node.textContent  = value.replace(reg,this.vm[key])
+            node.textContent = value.replace(reg, this.vm[key])
         }
     }
     //判断元素是否为指令
