@@ -18,7 +18,7 @@
         <input type="text" v-model="msg">
         <input type="text" v-model="count">
         <h1 v-html="msg">h1</h1>
-        <button onclick=a()></button>
+        <button id="app2" v-on:click="a()"></button>
     </div>
     <script src="./js/dep.js"></script>
     <script src="./js/watcher.js"></script>
@@ -37,6 +37,9 @@
         function a (){
             console.log(vm.count)
         }
+        let node = document.getElementById("app2")
+        console.log(node.attributes)
+
     </script>
 </body>
 

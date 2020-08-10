@@ -51,6 +51,12 @@ class Compiler {
         })
     }
 
+    //处理v-on指令
+    onUpdater(node,value,key){
+        console.log(node.attributes)
+    }
+
+
     //处理v-text指令
     textUpdater(node, value, key) {
         node.textContent = value
