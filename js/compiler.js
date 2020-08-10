@@ -43,7 +43,13 @@ class Compiler {
         updateFn && updateFn.call(this,node, this.vm[key], key)
     }
 
-
+    //处理v-html指令
+    htmlUpdater(node,value,key){
+        node.innerHTML = value
+        new Watcher(this.vm, key, (newValue) => {
+            node.innerHTML = newValue
+        })
+    }
 
     //处理v-text指令
     textUpdater(node, value, key) {
